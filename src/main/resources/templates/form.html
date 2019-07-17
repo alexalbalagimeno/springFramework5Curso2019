@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<!-- py-4 para dar padding vertical al contenedor -->
+	<div class="container py-4">
+	
+		<div class="card bg-dark text-white">
+			<div class="card-header bg-secondary" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+				<!-- Se crea contenedor arriba de errores de formulario -->
+				<!-- th:object="${cliente}" pasamos el object cliente al div -->
+				<!-- th:remove="tag" no queremos que nos salga la etiqueta con la info object -->
+				<div th:object="${cliente}" th:remove="tag">
+					<!-- th:if="${#fields.hasErrors('*')}" si hay algun error -->
+					<!-- class="alert alert-danger" estilo de bootstrap para que se vea rojo -->
+					<!-- th:each="err: ${#fields.errors('*')}" por cada error th:text="${err}" imprime texto-->
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+				
+				<!-- th:action -> Ruta a ClienteController del Post del metodo guardar -->
+				<!-- th:object -> Objeto que se mapea en ClienteController del Get del metodo crear (se mapea cliente) -->
+				<!-- method="post" para llamar al metodo guardar de ClienteController que es post y guarda cliente -->
+				<!-- enctype="multipart/form-data" codificacion que permite enviar/subir archivos con request http -->
+				<form th:action="@{/form}" th:object="${cliente}" method="post" enctype="multipart/form-data">
+
+					<!-- atributo class para dar estilo a los campos -->
+					<!-- form-group row para que los elementos esten en una fila -->
+					<div class="form-group row">
+						<!-- label con ancho de 2 columnas -->
+						<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-6">
+							<!-- th:errorclass="'form-control alert-danger'" para que se vea rojo si salta error -->
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<!-- Para comprobar si hay errores y mostrarlos -->
+							<!-- class="form-text text-danger" muestra el texto en rojo -->
+							<!-- th:if="${#fields.hasErrors('nombre')}" si el campo mapeado por nombre tiene errores -->
+							<!-- th:errors="*{nombre}" muestra los errores -->
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{apellido}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="email" class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{email}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="createAt" class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{createAt}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="file" class="col-sm-2 col-form-label">Foto</label>
+						<div class="col-sm-6">
+							<input type="file" name="file" class="form-control"/> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Crear Cliente"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
