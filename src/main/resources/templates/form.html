@@ -34,7 +34,7 @@
 					<!-- form-group row para que los elementos esten en una fila -->
 					<div class="form-group row">
 						<!-- label con ancho de 2 columnas -->
-						<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+						<label for="nombre" class="col-sm-2 col-form-label" th:text="#{text.cliente.nombre}">Nombre</label>
 						<div class="col-sm-6">
 							<!-- th:errorclass="'form-control alert-danger'" para que se vea rojo si salta error -->
 							<input type="text" th:field="*{nombre}" class="form-control"
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+						<label for="apellido" class="col-sm-2 col-form-label" th:text="#{text.cliente.apellido}">Apellido</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{apellido}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
@@ -57,7 +57,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="email" class="col-sm-2 col-form-label">Email</label>
+						<label for="email" class="col-sm-2 col-form-label" th:text="#{text.cliente.email}">Email</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{email}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="createAt" class="col-sm-2 col-form-label">Fecha</label>
+						<label for="createAt" class="col-sm-2 col-form-label" th:text="#{text.cliente.createAt}">Fecha</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{createAt}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="file" class="col-sm-2 col-form-label">Foto</label>
+						<label for="file" class="col-sm-2 col-form-label" th:text="#{text.cliente.foto}">Foto</label>
 						<div class="col-sm-6">
 							<input type="file" name="file" class="form-control"/> 
 						</div>

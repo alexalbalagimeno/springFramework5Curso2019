@@ -13,7 +13,7 @@
 			<div class="card-body">
 				<!-- Enlace al formulario -->
 				<h4 class="card-title">
-					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-success btn-xs">Crear
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-success btn-xs" th:text="#{text.cliente.crear}">Crear
 						cliente</a>
 				</h4>
 				<!-- class para el estilo de la tabla striped es intercalar color gris blanco en filas -->
@@ -21,14 +21,15 @@
 					<!-- class en el thead dark para que se vea negro -->
 					<thead class="thead-dark">
 						<tr>
+						<!-- th:text="#{text.cliente.nombre}" valores dinamicos de la traduccion -->
 							<th sec:authorize="hasRole('ROLE_USER')">id</th>
-							<th>nombre</th>
-							<th>apellido</th>
-							<th>email</th>
-							<th>fecha</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">crear factura</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+							<th th:text="#{text.cliente.nombre}">nombre</th>
+							<th th:text="#{text.cliente.apellido}">apellido</th>
+							<th th:text="#{text.cliente.email}">email</th>
+							<th th:text="#{text.cliente.createAt}">fecha</th>
+							<th th:text="#{text.cliente.factura.crear}" sec:authorize="hasRole('ROLE_ADMIN')">crear factura</th>
+							<th th:text="#{text.cliente.editar}" sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
+							<th th:text="#{text.cliente.eliminar}" sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -36,21 +37,21 @@
 							por eso los hemos definido en dicha clase -->
 						<tr th:each="cliente: ${clientes}">
 							<!-- enlace a ver detalle -->
-							<td><a sec:authorize="hasRole('ROLE_USER')" class="btn btn-primary btn-xs" 
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs" 
 							th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.id}"></a></td>
 							<td th:text="${cliente.nombre}"></td>
 							<td th:text="${cliente.apellido}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.createAt}"></td>
 							<!-- enlace que se va al formulario para crear factura del cliente (con su id) -->
-							<td sec:authorize="hasRole('ROLE_ADMIN')"> <a class="btn btn-success btn-xs" th:href="@{'/factura/form/' + ${cliente.id}}" th:text="'crear factura'"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"> <a class="btn btn-success btn-xs" th:href="@{'/factura/form/' + ${cliente.id}}" th:text="#{text.cliente.factura.crear}"></a></td>
 							<!-- enlace para editar cliente-->
 							<!-- class="btn btn-primary btn-xs" boton color primario y pequeño-->
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs"
-								th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
+								th:href="@{/form/} + ${cliente.id}" th:text="#{text.cliente.editar}"></a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
-								th:href="@{/eliminar/} + ${cliente.id}" th:text="'eliminar'"
-								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+								th:href="@{/eliminar/} + ${cliente.id}" th:text="#{text.cliente.eliminar}"
+								onclick="return confirm(document.getElementById('i18n_eliminar_cliente').innerHTML);"></a></td>
 						</tr>
 					</tbody>
 				</table>
