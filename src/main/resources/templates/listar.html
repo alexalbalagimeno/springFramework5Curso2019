@@ -15,6 +15,10 @@
 				<h4 class="card-title">
 					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-success btn-xs" th:text="#{text.cliente.crear}">Crear
 						cliente</a>
+					<!-- Para exportar listado clientes en CSV -->
+					<a class="btn btn-success btn-xs float-right" th:href="@{'/listar'(format=csv)}">CSV</a>
+					<!-- Para exportar listado clientes en XML -->
+					<a class="btn btn-outline-success btn-xs float-right mx-1" th:href="@{'/listar'(format=xml)}">XML</a>
 				</h4>
 				<!-- class para el estilo de la tabla striped es intercalar color gris blanco en filas -->
 				<table class="table table-striped table-bordered">
